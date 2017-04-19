@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+  
+  <mapper namespace="org.zerock.persistence.BoardDAO">
+  <select id="getTime" resultType="java.lang.String">
+  	select now()
+  </select>
+  
+  <insert id="insert" parameterType="org.zerock.domain.BoardVO">
+  insert into tbl_board2(title,content,writer) values(#{title},#{content},#{writer})
+  </insert>
+  
+  <select id="read" resultType="org.zerock.domain.BoardVO">
+  <![CDATA[          
+  
+  select * from tbl_board2 where bno>0 order by bno desc limit #{skip},#{amount}
+  
+  ]]>
+  </select>
+  
+  <update id="update" parameterType="org.zerock.domain.BoardVO">
+  update tbl_board2 set title=#{title} where bno=#{bno}
+  </update>
+  
+  
+  <delete id="delect" parameterType="org.zerock.domain.BoardVO">
+  delete from tbl_board2 where bno=#{bno}
+  </delete>
+  
+  </mapper>
